@@ -5,10 +5,6 @@ const answers = document.querySelectorAll(".answer")
 const defaultFighter = 'bandeira'
 const defaultQuestions = 'pro-questions'
 
-questions.forEach((question, index) => {
-            question.textContent=interviewContent[defaultQuestions]
-            answers[index].innerHTML=interviewContent[defaultFighter]["answers"];
-})
 
 async function changeFighter(event) {
     const portraitPath = `images/${event.currentTarget.id}.jpg`;
@@ -148,7 +144,8 @@ const interviewContent = {
             acho que as reuniões mensais que o pessoal faz são incentivo pra mim terminar uma\
             build ou um protótipo pra pegar feedback, que eu não teria em outro lugar.",
             "Daqui do Ceará eu estou esperando o lançamento do RoadOut, que é bem na minha praia,\
-            meio zeldinha, meio corrida.",
+            meio zeldinha, meio corrida.<br>\
+            <video autoplay loop muted playsinline class=\"video\" src=\"videos/road.mp4\"></video>",
             "Pra projetos comerciais eu acredito fortemente que o uso deve ser declarado (como na\
             Steam), mas incerto quanto aos detalhes do que precisa ser declarado. Eu não tenho\
             opiniões fortes fora refletir o que o resto dos consumidores opina, especialmente sobre\
@@ -163,8 +160,9 @@ const interviewContent = {
             projeto final. Eu me virei com video tutoriais gratuitos online mas eu sei que não é\
             pra todo mundo. Daí, entrar em game jams, eu acho.",
             "Os meus jogos em maioria estão nesse link da itch: <a href=\"https://nate-the-bard.itch.io\">https://nate-the-bard.itch.io</a><br>\
-            eu também tenho redes sociais e um blog/portfólio linkados nessa página mas eu não\
-            posto com frequência.",
+            eu também tenho redes sociais e um, entrar em game  blog/portfólio linkados nessa página mas eu não\
+            posto com frequência.<br>\
+            <video autoplay loop muted playsinline class=\"video\" src=\"videos/harold.mp4\"></video>",
             "Mesmo que você não queira trabalhar com ninguém, eu acho super importante ter um\
             grupo de colegas ou um fórum ou servidor discord pra compartilhar progresso, pegar\
             feedback, etc, em essência ter gente pra conviver enquanto dev e meio que fazer uma\
@@ -198,7 +196,8 @@ const interviewContent = {
             "um projeto que eu gosto do Studio Bravika é o Heróis do Ceará. Ele é um space\
             shooter vertical com elementos de Vampire Survivor, onde você usa figuras históricas\
             cearenses para controlar naves espaciais e lutar contra alienígenas em uma Quixadá\
-            futurista.",
+            futurista.<br>\
+            <video autoplay loop muted playsinline class=\"video\" src=\"videos/heroes.mp4\"></video>",
             "existem! Ano que vem o cronograma está cheio. Não posso dizer quais eventos são ainda,\
             mas vocês podem ficar de olho nas nossas redes sociais.",
             "A ideia de que todo desenvolvedor de jogos passa um montão de tempo jogando videogames.\
@@ -264,7 +263,8 @@ const interviewContent = {
             com rimas do break dance numa mecânica de enxame, onde frescar com a cara do seu\
             oponente pode fazer ele errar o movimento. Já temos uma versão jogável do Fortal\
             Step no itch.io:<br><a href=\"https://pedro-gustavo-pgzim.itch.io/fortalstep\">\
-            https://pedro-gustavo-pgzim.itch.io/fortalstep</a>.",
+            https://pedro-gustavo-pgzim.itch.io/fortalstep</a>.<br>\
+            <video autoplay loop muted playsinline class=\"video\" src=\"videos/step.mp4\"></video>",
             "Tanto no nosso site quanto no Instagram, mas nós estamos sempre disponíveis pra\
             participar dos eventos da comunidade. Tentamos estar na maioria dos FINDs (Fortaleza\
             Indie Games), nós expomos na Feira do Conhecimento. Todo evento em que pode mostrar\
@@ -369,5 +369,5 @@ const interviewContent = {
 
 questions.forEach((question, index) => {
     question.textContent=interviewContent[defaultQuestions][index];
-    answers[index].innerHTML=interviewContent[defaultFighter][index];
+    answers[index].innerHTML=interviewContent[defaultFighter]["answers"][index];
 })

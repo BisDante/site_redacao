@@ -166,6 +166,11 @@ html, body {
   color: rgb(60, 60, 60);
 }
 
+.video {
+  margin-top: 30px;
+  width: 100%;
+}
+
 body {
   background-size: 50px 50px; 
   background-image: 
