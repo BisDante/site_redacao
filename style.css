@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=BBH+Bogle&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+html, body {
+  padding: 0px;
+  margin: 0px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  background-color: blue;
+  width: 100vw;
+  height: 100px;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+.menu-title {
+  margin: 20px 10px;
+  color: white;
+  font-family: "BBH Bogle", sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+  font-style: normal;
+}
+
+
+.menu-items {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: 100%;
+  margin-left: auto;
+}
+
+.menu-button {
+  background: none;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  border: none;
+  padding: 10px 15px;
+  border-right: 1px solid white;
+  transition: background-image 0.5s;
+}
+
+.menu-button:last-child {
+  border-right: none;
+}
+
+.menu-button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.fighters-screen {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.fighters-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 120px;
+  margin: 0 auto;
+}
+
+.fighter-menu-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.fighter-portrait{
+  opacity: 0;
+  display: block;
+  height: 400px;
+  position: absolute;
+  left: 40px;
+  transform: translateX(0px);
+  transition-property: transform, opacity;
+  transition-duration: 0.5s;
+  animation-timing-function: ease-in;
+}
+
+.fighter-portrait-animate {
+  opacity: 1;
+  transform: translateX(-20px);
+}
+
+.fighter-stats {
+  display: block;
+  position: absolute;
+  right: 20px;
+  width: 300px;
+  text-align: left;
+}
+
+.stat-type {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: rgb(60, 60, 60)
+}
+
+.stat-text {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgb(60, 60, 60)
+}
+
+.ceara-big {
+  display: block;
+  height: 300px;
+}
+
+.fighter-button {
+  background-color: black;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border: 1px solid black;
+  margin-left: 0px;
+  width: 50px;
+  height: 60px;
+  cursor:pointer;
+}
+
+.fighter-button:hover {
+  opacity: 0.8;
+}
+
+.main-content {
+  background-color: white;
+  width: 70%;
+  align-self: center;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.question {
+  margin: 40px 80px 20px;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.answer {
+  margin: 0px 80px;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  text-align: justify;
+  line-height: 30px;
+  color: rgb(60, 60, 60);
+}
+
+body {
+  background-size: 50px 50px; 
+  background-image: 
+  linear-gradient(to right, rgb(13, 61, 194) 1px, transparent 1px), 
+  linear-gradient(to bottom, rgb(13, 61, 194) 1px, transparent 1px);
+}
