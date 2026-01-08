@@ -1,44 +1,91 @@
 const fighterButtons = document.querySelectorAll(".fighter-button");
-const fighterPortrait = document.getElementById("fighter-portrait")
-const questions = document.querySelectorAll(".question")
-const answers = document.querySelectorAll(".answer")
-const defaultFighter = 'bandeira'
-const defaultQuestions = 'pro-questions'
+const fighterPortrait = document.getElementById("fighter-portrait");
+const questions = document.querySelectorAll(".question");
+const answers = document.querySelectorAll(".answer");
+const stats = document.querySelectorAll(".stat-text");
+const defaultFighter = 'bandeira';
+const defaultQuestions = 'pro-questions';
 
+let currentFighter = defaultFighter;
 
 async function changeFighter(event) {
-    const portraitPath = `images/${event.currentTarget.id}.jpg`;
-    const audio = new Audio("sounds/vgmenuselect.ogg");
-    const newQuestions = interviewContent[event.currentTarget.dataset.questions]
-    const newAnswers = interviewContent[event.currentTarget.id]["answers"]
-    fighterPortrait.classList.remove('fighter-portrait-animate');
-    
-    fighterPortrait.style.transition = 'none';
-    fighterPortrait.classList.remove('fighter-portrait-animate')
+    if (event.currentTarget.id != currentFighter) {    
+        const portraitPath = `images/${event.currentTarget.id}.jpg`;
+        const audio = new Audio("sounds/vgmenuselect.ogg");
+        const newQuestions = interviewContent[event.currentTarget.dataset.questions];
+        const newAnswers = interviewContent[event.currentTarget.id]["answers"];
+        const newStats = interviewContent[event.currentTarget.id]["data"];
+        fighterPortrait.classList.remove('fighter-portrait-animate');
 
-    setTimeout(() => {
+        currentFighter=event.currentTarget.id
+        
+        fighterPortrait.style.transition = 'none';
+        fighterPortrait.classList.remove('fighter-portrait-animate');
+
+        setTimeout(() => {
+            fighterPortrait.style.transition = '';
+            fighterPortrait.src = portraitPath;
+            fighterPortrait.offsetHeight;
+            fighterPortrait.classList.add('fighter-portrait-animate');
+            
+            stats.forEach((stat, index) => {
+                stat.textContent=newStats[index];
+            })
+
+            questions.forEach((question, index) => {
+                question.textContent=newQuestions[index];
+                answers[index].innerHTML=newAnswers[index];
+            })
+            audio.play();
+        }, 10);
+    }
+}
+
+function changePreview(event) {
+    if (event.currentTarget.id != currentFighter) {       
+        const portraitPath = `images/${event.currentTarget.id}.jpg`;
+        const newStats = interviewContent[event.currentTarget.id]["data"];
+        fighterPortrait.style.transition = 'none';
+        fighterPortrait.classList.remove('fighter-portrait-animate');
+        
+        setTimeout(() => {
         fighterPortrait.style.transition = '';
         fighterPortrait.src = portraitPath;
         fighterPortrait.offsetHeight;
         fighterPortrait.classList.add('fighter-portrait-animate');
-        
-        questions.forEach((question, index) => {
-            question.textContent=newQuestions[index];
-            answers[index].innerHTML=newAnswers[index];
-        }
-    )
-        audio.play();
-    }, 10);
+
+        stats.forEach((stat, index) => {
+            stat.textContent=newStats[index];
+            })
+        }, 10);
+    }    
 }
 
-function changePreview(event) {
-    console.log(event.currentTarget.id)
+function revertFighter(event) {
+    if (event.currentTarget.id != currentFighter) {       
+        const portraitPath = `images/${currentFighter}.jpg`;
+        const newStats = interviewContent[currentFighter]["data"];
+        fighterPortrait.style.transition = 'none';
+        fighterPortrait.classList.remove('fighter-portrait-animate');
+        
+        setTimeout(() => {
+        fighterPortrait.style.transition = '';
+        fighterPortrait.src = portraitPath;
+        fighterPortrait.offsetHeight;
+        fighterPortrait.classList.add('fighter-portrait-animate');
+
+        stats.forEach((stat, index) => {
+            stat.textContent=newStats[index];
+            })
+        }, 10);
+    }
 }
 
 fighterButtons.forEach(button => {
-    button.style.backgroundImage=`url(images/${button.id}.jpg)`
+    button.style.backgroundImage=`url(images/${button.id}.jpg)`;
     button.addEventListener("click", changeFighter);
-    button.addEventListener("mouseover", changePreview)
+    button.addEventListener("mouseover", changePreview);
+    button.addEventListener("mouseleave", revertFighter)
 })
 
 const interviewContent = {
@@ -124,10 +171,9 @@ const interviewContent = {
             "Pra mim foi um processo natural, eu sempre gostei de brinquedos e fazer \"jogos\"\
             com papel e dados, depois eu joguei vários sandboxes tipo Minecraft, comecei a fazer\
             mods pra eles, e daí fazer jogos do zero não foi um pulo grande. Eu ainda brinco de\
-            fazer jogos analógicos com cartas e dados também.",
-            "De inspirações, é difícil dizer, mas eu tenho muito respeito pelo Will Wright, por\
-            trás de jogos tipo Sim City, The Sims, Spore etc, e a mentalidade dele de fazer\
-            brinquedos digitais.",
+            fazer jogos analógicos com cartas e dados também.De inspirações, é difícil dizer,\
+            mas eu tenho muito respeito pelo Will Wright, por trás de jogos tipo Sim City, The\
+            Sims, Spore etc, e a mentalidade dele de fazer brinquedos digitais.",
             "Eu adoraria, especialmente pois eu dou muito valor em trabalhar em equipe. Mas\
             abrir meu próprio pequeno negócio é assustador e as maiores empresas AAA não parecem\
             ser bons ambientes de trabalho esses dias.",
@@ -145,7 +191,9 @@ const interviewContent = {
             build ou um protótipo pra pegar feedback, que eu não teria em outro lugar.",
             "Daqui do Ceará eu estou esperando o lançamento do RoadOut, que é bem na minha praia,\
             meio zeldinha, meio corrida.<br>\
-            <video autoplay loop muted playsinline class=\"video\" src=\"videos/road.mp4\"></video>",
+            <video autoplay loop muted playsinline class=\"video\" src=\"videos/road.mp4\"></video><br>\
+            <p class=\"caption\">RoadOut. Demo disponível na Steam:<br>\
+            <a href=\"https://store.steampowered.com/app/1829270/RoadOut/\">https://store.steampowered.com/app/1829270/RoadOut/</a></p>",
             "Pra projetos comerciais eu acredito fortemente que o uso deve ser declarado (como na\
             Steam), mas incerto quanto aos detalhes do que precisa ser declarado. Eu não tenho\
             opiniões fortes fora refletir o que o resto dos consumidores opina, especialmente sobre\
@@ -162,7 +210,8 @@ const interviewContent = {
             "Os meus jogos em maioria estão nesse link da itch: <a href=\"https://nate-the-bard.itch.io\">https://nate-the-bard.itch.io</a><br>\
             eu também tenho redes sociais e um, entrar em game  blog/portfólio linkados nessa página mas eu não\
             posto com frequência.<br>\
-            <video autoplay loop muted playsinline class=\"video\" src=\"videos/harold.mp4\"></video>",
+            <video autoplay loop muted playsinline class=\"video\" src=\"videos/harold.mp4\"></video>\
+            <p class=\"caption\">Harold Voidskipper. Disponível na página do itch io</p>",
             "Mesmo que você não queira trabalhar com ninguém, eu acho super importante ter um\
             grupo de colegas ou um fórum ou servidor discord pra compartilhar progresso, pegar\
             feedback, etc, em essência ter gente pra conviver enquanto dev e meio que fazer uma\
@@ -197,7 +246,9 @@ const interviewContent = {
             shooter vertical com elementos de Vampire Survivor, onde você usa figuras históricas\
             cearenses para controlar naves espaciais e lutar contra alienígenas em uma Quixadá\
             futurista.<br>\
-            <video autoplay loop muted playsinline class=\"video\" src=\"videos/heroes.mp4\"></video>",
+            <a href=\"https://studiobravika.itch.io/heroisdoceara\">https://studiobravika.itch.io/heroisdoceara\</a>\
+            <video autoplay loop muted playsinline class=\"video\" src=\"videos/heroes.mp4\"></video>\
+            <p class=\"caption\">Heróis do Ceará.</p>",
             "existem! Ano que vem o cronograma está cheio. Não posso dizer quais eventos são ainda,\
             mas vocês podem ficar de olho nas nossas redes sociais.",
             "A ideia de que todo desenvolvedor de jogos passa um montão de tempo jogando videogames.\
@@ -365,9 +416,13 @@ const interviewContent = {
         que gostaria de divulgar?",
         "Algum conselho para quem deseja começar a desenvolver jogos não-profissionalmente?"
     ]
-}
+};
+
+stats.forEach((stat, index) => {
+    stat.textContent=interviewContent[defaultFighter]["data"][index];
+});
 
 questions.forEach((question, index) => {
     question.textContent=interviewContent[defaultQuestions][index];
     answers[index].innerHTML=interviewContent[defaultFighter]["answers"][index];
-})
+});
