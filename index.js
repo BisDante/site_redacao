@@ -10,7 +10,7 @@ let currentFighter = defaultFighter;
 
 async function changeFighter(event) {
     if (event.currentTarget.id != currentFighter) {    
-        const portraitPath = `images/${event.currentTarget.id}.jpg`;
+        const portraitPath = `images/${event.currentTarget.id}.png`;
         const audio = new Audio("sounds/vgmenuselect.ogg");
         const newQuestions = interviewContent[event.currentTarget.dataset.questions];
         const newAnswers = interviewContent[event.currentTarget.id]["answers"];
@@ -43,7 +43,7 @@ async function changeFighter(event) {
 
 function changePreview(event) {
     if (event.currentTarget.id != currentFighter) {       
-        const portraitPath = `images/${event.currentTarget.id}.jpg`;
+        const portraitPath = `images/${event.currentTarget.id}.png`;
         const newStats = interviewContent[event.currentTarget.id]["data"];
         fighterPortrait.style.transition = 'none';
         fighterPortrait.classList.remove('fighter-portrait-animate');
@@ -63,7 +63,7 @@ function changePreview(event) {
 
 function revertFighter(event) {
     if (event.currentTarget.id != currentFighter) {       
-        const portraitPath = `images/${currentFighter}.jpg`;
+        const portraitPath = `images/${currentFighter}.png`;
         const newStats = interviewContent[currentFighter]["data"];
         fighterPortrait.style.transition = 'none';
         fighterPortrait.classList.remove('fighter-portrait-animate');
@@ -82,7 +82,7 @@ function revertFighter(event) {
 }
 
 fighterButtons.forEach(button => {
-    button.style.backgroundImage=`url(images/${button.id}.jpg)`;
+    button.style.backgroundImage=`url(images/${button.id}.png)`;
     button.addEventListener("click", changeFighter);
     button.addEventListener("mouseover", changePreview);
     button.addEventListener("mouseleave", revertFighter)
@@ -117,7 +117,8 @@ const interviewContent = {
             procurando sempre valorizar o povo nordestino, que quebra barreiras mesmo diante\
             de muitas dificuldades. Tudo isso se passando em um sertão punk, onde a tecnologia\
             é alta mas a qualidade de vida continua baixa, ambiente onde são explorados temas\
-            de transhumanismo e meio ambiente.",
+            de transhumanismo e meio ambiente.<br>\
+            <img class=\"video\" src=\"images/sertrons.webp\">",
             "Sim. Este ano participamos do PAKU Chibi e outro evento de boardgame aqui na\
             região do Cariri, e pretendemos participar de todos os eventos os quais tivermos\
             a oportunidade, tanto aqui no Cariri quanto em Fortaleza. Os eventos são uma\

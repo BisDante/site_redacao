@@ -61,9 +61,13 @@ html, body {
 .fighters-screen {
   display: flex;
   flex-direction: column;
-  text-align: center;
   width: 100%;
+  padding: 40px 0px 40px 0px;
+  text-align: center;
+  align-items: center;
   margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .fighters-menu {
@@ -99,19 +103,24 @@ html, body {
 }
 
 .fighter-stats {
-  display: block;
+  display: flex;
+  align-self: center;
   position: absolute;
   right: 20px;
+  top: 15%;
   width: 300px;
   text-align: left;
+  flex-direction: column;
 }
 
 .stat-type {
+  margin-top: 0px;
   margin-bottom: 5px;
   font-family: "Ubuntu", sans-serif;
   font-size: 24px;
   font-weight: 500;
-  color: rgb(60, 60, 60)
+  color: rgb(60, 60, 60);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .stat-text {
@@ -119,20 +128,22 @@ html, body {
   font-family: "Ubuntu", sans-serif;
   font-size: 18px;
   font-weight: 400;
-  color: rgb(60, 60, 60)
+  color: rgb(60, 60, 60);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .ceara-big {
   display: block;
   height: 300px;
+  margin-bottom: 20px;
 }
 
 .fighter-button {
-  background-color: black;
+  background-color: white;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  border: 1px solid black;
+  border: 1px solid grey;
   margin-left: 0px;
   width: 50px;
   height: 60px;
@@ -180,6 +191,13 @@ html, body {
   text-align: center;
   color: rgb(60, 60, 60);
   line-height: 16px;
+}
+
+.footer {
+  background-color: blue;
+  width: 100%;
+  height: 100px;
+  margin-top: 100px;
 }
 
 body {
