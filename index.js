@@ -1,91 +1,34 @@
-const fighterButtons = document.querySelectorAll(".fighter-button");
-const fighterPortrait = document.getElementById("fighter-portrait");
 const questions = document.querySelectorAll(".question");
 const answers = document.querySelectorAll(".answer");
-const stats = document.querySelectorAll(".stat-text");
-const defaultFighter = 'bandeira';
+const buttons = document.querySelectorAll("[data-carousel-button]")
+
+const defaultPerson = 'bandeira';
 const defaultQuestions = 'pro-questions';
 
-let currentFighter = defaultFighter;
+const names = ["bandeira", "rayanne", "natan", "barreto"]
+const questionTypes = ["pro-questions", "pro-questions", "hobby-questions", "pro-questions"]
 
-async function changeFighter(event) {
-    if (event.currentTarget.id != currentFighter) {    
-        const portraitPath = `images/${event.currentTarget.id}.png`;
-        const audio = new Audio("sounds/vgmenuselect.ogg");
-        const newQuestions = interviewContent[event.currentTarget.dataset.questions];
-        const newAnswers = interviewContent[event.currentTarget.id]["answers"];
-        const newStats = interviewContent[event.currentTarget.id]["data"];
-        fighterPortrait.classList.remove('fighter-portrait-animate');
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    const offset = button.dataset.carouselButton === "next" ? 1 : -1
+    const slides = button
+      .closest("[data-carousel]")
+      .querySelector("[data-slides]")
 
-        currentFighter=event.currentTarget.id
-        
-        fighterPortrait.style.transition = 'none';
-        fighterPortrait.classList.remove('fighter-portrait-animate');
+    const activeSlide = slides.querySelector("[data-active]")
+    let newIndex = [...slides.children].indexOf(activeSlide) + offset
+    if (newIndex < 0) newIndex = slides.children.length - 1
+    if (newIndex >= slides.children.length) newIndex = 0
+    console.log(newIndex)
 
-        setTimeout(() => {
-            fighterPortrait.style.transition = '';
-            fighterPortrait.src = portraitPath;
-            fighterPortrait.offsetHeight;
-            fighterPortrait.classList.add('fighter-portrait-animate');
-            
-            stats.forEach((stat, index) => {
-                stat.textContent=newStats[index];
-            })
+    slides.children[newIndex].dataset.active = true
+    delete activeSlide.dataset.active
 
-            questions.forEach((question, index) => {
-                question.textContent=newQuestions[index];
-                answers[index].innerHTML=newAnswers[index];
-            })
-            audio.play();
-        }, 10);
-    }
-}
-
-function changePreview(event) {
-    if (event.currentTarget.id != currentFighter) {       
-        const portraitPath = `images/${event.currentTarget.id}.png`;
-        const newStats = interviewContent[event.currentTarget.id]["data"];
-        fighterPortrait.style.transition = 'none';
-        fighterPortrait.classList.remove('fighter-portrait-animate');
-        
-        setTimeout(() => {
-        fighterPortrait.style.transition = '';
-        fighterPortrait.src = portraitPath;
-        fighterPortrait.offsetHeight;
-        fighterPortrait.classList.add('fighter-portrait-animate');
-
-        stats.forEach((stat, index) => {
-            stat.textContent=newStats[index];
-            })
-        }, 10);
-    }    
-}
-
-function revertFighter(event) {
-    if (event.currentTarget.id != currentFighter) {       
-        const portraitPath = `images/${currentFighter}.png`;
-        const newStats = interviewContent[currentFighter]["data"];
-        fighterPortrait.style.transition = 'none';
-        fighterPortrait.classList.remove('fighter-portrait-animate');
-        
-        setTimeout(() => {
-        fighterPortrait.style.transition = '';
-        fighterPortrait.src = portraitPath;
-        fighterPortrait.offsetHeight;
-        fighterPortrait.classList.add('fighter-portrait-animate');
-
-        stats.forEach((stat, index) => {
-            stat.textContent=newStats[index];
-            })
-        }, 10);
-    }
-}
-
-fighterButtons.forEach(button => {
-    button.style.backgroundImage=`url(images/${button.id}.png)`;
-    button.addEventListener("click", changeFighter);
-    button.addEventListener("mouseover", changePreview);
-    button.addEventListener("mouseleave", revertFighter)
+    questions.forEach((question, index) => {
+    question.textContent=interviewContent[questionTypes[newIndex]][index];
+    answers[index].innerHTML=interviewContent[names[newIndex]]["answers"][index];
+    })
+  })
 })
 
 const interviewContent = {
@@ -334,13 +277,13 @@ const interviewContent = {
             te preparar tão bem quanto o necessário. Em contrapartida, acho que tem muitas\
             iniciativas boas aqui no Ceará, como o instituto Bojogá e os cursos do CVT (Centro\
             Vocacional Tecnológico), que tem professores super bacanas e com experiência de\
-            mercado.<br>\
+            mercado.<br><br>\
             O segundo aspecto é a comunidade. Nós temos uma comunidade muito rachada e muito\
             nichada, às vezes é muito difícil conectar desenvolvedores iniciantes com aqueles\
             que têm mais experiência, isso acaba transformando o cenário de desenvolvimento de\
             jogos em uma panelinha. A questão da educação é mais difícil, mas neste problema,\
             não dependemos de ninguém, e nesse sentido é bom mencionar a importância do Fórum\
-            de Jogos do Ceará e o IGDA para enfrentá-lo.<br>\
+            de Jogos do Ceará e o IGDA para enfrentá-lo.<br><br>\
             A terceira dificuldade é a ausência de investimento, que é muito difícil conseguir\
             no Brasil. Na minha experiência, as publishers brasileiras são muito mais focadas\
             no marketing do que no investimento para o desenvolvimento, e também estamos em uma\
@@ -368,7 +311,8 @@ const interviewContent = {
             qualquer contexto de desenvolvimento de jogos. Eu acho que o game dev é algo que\
             você realmente tem que dar a cara tapa e ir pelo \“grind\”.",
             "temos o nosso site, o instagram tiktok e twitter, mas o lugar onde somos mais\
-            ativos é o Instagram mesmo.",
+            ativos é o Instagram mesmo.<br>\
+            <a href=\"https://www.instagram.com/rebuild_stdio/\">https://www.instagram.com/rebuild_stdio/</a>",
             "Estejam presentes nos eventos e se façam conhecidos, digam suas experiências mesmo\
             que você não tenha tantas assim. “Ah, eu estou fazendo tal coisa em Godot”, pô, se\
             você viesse e me dissesse algo assim eu iria querer saber mais sobre, e isso se\
@@ -419,11 +363,7 @@ const interviewContent = {
     ]
 };
 
-stats.forEach((stat, index) => {
-    stat.textContent=interviewContent[defaultFighter]["data"][index];
-});
-
 questions.forEach((question, index) => {
     question.textContent=interviewContent[defaultQuestions][index];
-    answers[index].innerHTML=interviewContent[defaultFighter]["answers"][index];
+    answers[index].innerHTML=interviewContent[defaultPerson]["answers"][index];
 });
